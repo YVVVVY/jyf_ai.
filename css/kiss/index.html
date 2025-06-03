@@ -8,6 +8,7 @@
   body {
     background-color: #78e0ef;
     margin: 0;
+    overflow: hidden;
   }
 
   .container {
@@ -15,8 +16,6 @@
     top: 50%;
     left: 50%;
     width: 238px;
-    /* height: 238px; */
-    /* background: pink; */
     transform: translate(-50%, -50%);
   }
 
@@ -28,8 +27,45 @@
     display: inline-block;
     background-color: white;
     vertical-align: top;
-    position: relative; /*相对定位，子元素相对它定位*/
+    position: relative; 
+    animation: kiss 2s infinite alternate;
   }
+
+  @keyframes kiss {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(50% - 8px)); 
+    }
+  }
+
+  #l-ball {
+    animation-name: kiss-left;
+  }
+
+  #r-ball {
+    animation-name: kiss-right;
+  }
+
+  @keyframes kiss-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(30px);
+    }
+  }
+
+  @keyframes kiss-right {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-30px);
+    }
+  }
+
   .face{
     width: 70px;
     height: 30px;
@@ -37,14 +73,29 @@
     right: 0;
     top: 30px;
     border-top-right-radius: 15px;
-    /* background-color: green;   */
+    transition: all 0.5s;
   }
+
+  /* 亲吻时的表情变化 */
+  .ball.kissing .eye {
+    border-bottom: 0;
+    border-top: 5px solid black;
+  }
+
+  .ball.kissing .mouth {
+    border-bottom: 0;
+    border-top: 5px solid #000;
+    top: -5px;
+    bottom: auto;
+  }
+
   .eye{
     width: 15px;
     height: 14px;
     border-radius: 50%;
     border-bottom: 5px solid black;
     position: absolute;
+    transition: all 0.5s;
   }
   .eye-l{
     left: 10px;
@@ -67,24 +118,80 @@
     left: 0;
     right: 0;
     margin: auto;
+    transition: all 0.5s;
+  }
+
+  /* 爱心样式 */
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000;
+    transform: rotate(-45deg);
+    animation: float 5s infinite;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000;
+    border-radius: 50%;
+  }
+
+  .heart::before {
+    top: -10px;
+    left: 0;
+  }
+
+  .heart::after {
+    left: 10px;
+    top: 0;
+  }
+
+  @keyframes float {
+    0% {
+      opacity: 1;
+      transform: translateY(100vh) rotate(-45deg) scale(0.5);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10vh) rotate(-45deg) scale(1.5);
+    }
   }
   </style>
 </head>
 <body>
   <div class="container">
-    <div id="l-ball" class="ball">
+    <div id="l-ball" class="ball" onanimationiteration="changeExpression(this)">
       <div class="face face-l">
         <div class="eye eye-l"></div>
         <div class="eye eye-r"></div>
         <div class="mouth"></div>
       </div>
     </div>
-    <div id="r-ball" class="ball">
+    <div id="r-ball" class="ball" onanimationiteration="changeExpression(this)">
       <div class="face face-r">
         <div class="eye eye-l eye-r-p"></div>
         <div class="eye eye-r eye-r-p"></div>
         <div class="mouth mouth-r"></div>
+      </div>
     </div>
   </div>
+
+  <!-- 添加爱心元素 -->
+  <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="heart" style="left: 30%; animation-delay: 1s;"></div>
+  <div class="heart" style="left: 50%; animation-delay: 2s;"></div>
+  <div class="heart" style="left: 70%; animation-delay: 3s;"></div>
+  <div class="heart" style="left: 90%; animation-delay: 4s;"></div>
+
+  <script>
+    function changeExpression(ball) {
+      ball.classList.toggle('kissing');
+    }
+  </script>
 </body>
 </html>

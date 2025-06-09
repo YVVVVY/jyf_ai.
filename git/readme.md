@@ -16,3 +16,8 @@
 
  - new.txt
  
+ # 发送到git
+ git status
+ git add new.txt
+ git commit -m "add new.txt"
+ git push origin main

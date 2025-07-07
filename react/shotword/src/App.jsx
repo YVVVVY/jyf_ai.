@@ -64,6 +64,8 @@ function App() {
     // base64  资源 比较小-> atob -> unit8Array -> blob->URL.createObjectURL
     // -> 临时地址-》audio 展示
     const audioUrl = await generateAudio(replyData.example_sentence);
+    console.log(audioUrl,'app');
+    setAudio(audioUrl);
   }
 
   return (
@@ -106,4 +108,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

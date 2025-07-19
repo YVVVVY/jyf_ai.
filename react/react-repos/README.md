@@ -29,4 +29,20 @@
        入口文件
        添加路由功能，SPA
        添加全局应用状态管理
+
+- RepoList 功能模块
+    - params 解析
+       - useParams 动态参数对象
+       - 不要放到useEffect里面
+       - 校验id
+           不要相信用户的任何提交
+       - Navigate('/') -> useEffect 中去
+- 组件的开发模式
+   - UI组件 (jsx)
+   - 自定义hooks useRepos 方便
+   - 状态管理 应用层级 context 来管
+      - repos loading error => context value
+      - useReducer reducer 函数
+   - 
+
     

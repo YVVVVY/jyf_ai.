@@ -44,3 +44,12 @@ export const kimiChat = async (messages) => {
         'moonshot-v1-auto');
     return res;
 }
+
+export const generateAvatar = async (text) => {
+    // 设计prompt
+    const prompt =`
+    你是一位专业的头像生成器，你的任务是根据用户的昵称和slogan生成一个头像。
+    用户的信息是${text}
+    要求有个性，有设计感。
+    `
+}

@@ -12,6 +12,7 @@ import {
 import MainLayout from '@/components/MainLayout'
 import BlankLayout from '@/components/BlankLayout'
 import Loading from '@/components/Loading'
+import Toast from '@/components/Toast'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Search = lazy(() => import('@/pages/Search'))
@@ -20,7 +21,9 @@ const Trip = lazy(() => import('@/pages/Trip'))
 const Account = lazy(() => import('@/pages/Account'))
 const Collection = lazy(() => import('@/pages/Collection'))
 const Detail = lazy(() => import('@/pages/Detail'))
-
+const ArticleNew = lazy(()=>import('@/pages/Article/ArticleNew'))
+const Article = lazy(()=>import('@/pages/Article'))
+  
 function App() {
 
   return (
@@ -38,14 +41,19 @@ function App() {
             <Route path='/collection' element={<Collection />} />
 
           </Route>
-          
           {/* 空的Layout */}
           <Route element={<BlankLayout />}>
             <Route path='/search' element={<Search />} />
             <Route path='/detail/:id' element={<Detail />} />
+            <Route path="/article" element={<Article />}>
+              <Route path="new" element={<ArticleNew />} />
+              {/* <Route path="list" element={<ArticleList />} /> */}
+            </Route>
           </Route>
+          
         </Routes>
       </Suspense>
+      <Toast />
     </>
   )
 }
